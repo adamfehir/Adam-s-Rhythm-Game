@@ -2,16 +2,22 @@
 float[] noteX = new float [100];
 float[] noteY = new float [100];
 int totalNotes = 0;
+float noteSpeed = 3;
 
 void setup() {
   size(1300, 900);
+
 }
 
-
 void draw() {
+  background(0);
   receptors();
   drawNote();
-  spawnNote();
+  moveNote();
+  
+  if (frameCount % 60 == 1) {
+    spawnNote();
+  }
 }
 
 // Create Receptors
@@ -34,4 +40,11 @@ void spawnNote() {
   noteX[totalNotes] = spawnPos[int(random(4))];
   noteY[totalNotes] = 0;
   totalNotes++;
+}
+
+// Move Note
+void moveNote(){
+  for (int i = 0; i < totalNotes; i++){
+    noteY[i] += noteSpeed;
+  }
 }
